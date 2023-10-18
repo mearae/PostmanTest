@@ -1,11 +1,21 @@
 package com.example.demo.user;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+@RequiredArgsConstructor
 @Service
 public class UserService {
 
-    public boolean function(String email) {
-        return false;
+    private final UserRepository userRepository;
+
+    public String findByEmail(String email) {
+        User user =  userRepository.findByEmail(email);
+        
+        if (user == null){
+            return "없는 사용자";
+        }
+
+        return "있는 사용자";
     }
 }
