@@ -11,7 +11,7 @@ public class UserService {
 
     public String findByEmail(String email) {
         User user =  userRepository.findByEmail(email);
-        
+
         if (user == null){
             return "없는 사용자";
         }
