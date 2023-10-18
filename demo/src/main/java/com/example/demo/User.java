@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,15 +17,38 @@ import javax.persistence.*;
 // 1-2. 'public' 또는 'protected'의 접근 수준을 가져야 한다.
 // 2. @Entity가 있느 클래스는 상속을 받거나, 다른 Entity를 상속받을 수 있다.
 // 3. Entity 클래스의 필드는 관계형 매핑을 위해서 다른 어노테이션을 추가할 수 있다.
-// 3-2. @Colume, @Id, @OneToMany, @ManyToOne 등등 ...
+// 3-2. @Column, @Id, @OneToMany, @ManyToOne 등등 ...
 
 @Table(name = "user") // 회사마다 약속된 이름이 다름
 // ** table 이름을 "user"로 설정한다. 
 
 public class User {
 
-    @Id
+    @Id // ** 해당 필드를 PK로 설정한다.
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // ** PK 자동 설정
     private int id;
 
+    // ** length = 45 : DB에서의 길이를 45로 설정
+    // ** nullable = false : 이 컬럼을 null로 설정할 수 없다.
+    @Column(length = 45, nullable = false)
     private String name;
+
+    // ** length = 100 : DB에서의 길이를 100로 설정
+    // ** nullable = false : 이 컬럼을 null로 설정할 수 없다.
+    // ** unique = true : 이 컬럼의 값을 유일한 값으로 설정한다. (중복 불가)
+    @Column(length = 100, nullable = false, unique = true)
+    private String email;
+
+    @Column(length = 255, nullable = false)
+    private String password;
+
+    // ** 빌더 패턴을 쉽게 구현할 수 있도록 해준다.
+    // ** 주로 인자가 많거나, 인자를 선택적으로 지정해야 하는 경우 사용된다.
+    @Builder
+    public User(int id, String name, String email, String password) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
 }
