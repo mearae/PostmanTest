@@ -18,6 +18,7 @@ import javax.validation.Valid;
 @RestController
 public class UserController {
 
+    private final UserRepository userRepository;
     private final UserService userService;
 
     // @Valid : 받아온 폼의 데이터의 유효성을 검사하는 역할을 수행
@@ -31,8 +32,10 @@ public class UserController {
     public ResponseEntity<?> login(@RequestBody @Valid UserRequest.LoginDto loginDto){
         // ResponseEntity<?> : json 변경
         // 변경할 데이터의 형태가 모두 다를 수 있기 때문에 <?> 형태로 변환
-        String byEmail = userService.findByEmail(loginDto.getEmail());
+        //userService.findByEmail(loginDto);
+        userRepository.save(loginDto.toEntity());
 
         return ResponseEntity.ok(ApiUtils.success(null));
+        //return ResponseEntity.ok(ApiUtils.error("meessage"));
     }
 }

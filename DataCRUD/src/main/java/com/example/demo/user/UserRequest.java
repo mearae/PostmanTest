@@ -29,8 +29,12 @@ public class UserRequest {
         // (?=.*[@#$%^&+=]): 적어도 하나의 특수문자(@, #, $, %, ^, &, +, =)가 포함되어야 함
         // [A-Za-z\\d@#$%^&+=]{8,20}: 영문자, 숫자 및 특수문자만 허용하며, 8~20글자여야 함
 
+        @NotEmpty
+        private String name;
+
         public User toEntity(){
             return User.builder()
+                    .name(name)
                     .email(email)
                     .password(password)
                     .build();

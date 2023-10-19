@@ -19,7 +19,7 @@ import javax.persistence.*;
 // 3. Entity 클래스의 필드는 관계형 매핑을 위해서 다른 어노테이션을 추가할 수 있다.
 // 3-2. @Column, @Id, @OneToMany, @ManyToOne 등등 ...
 
-@Table(name = "user") // 회사마다 약속된 이름이 다름
+@Table(name = "userDT") // 회사마다 약속된 이름이 다름
 // ** table 이름을 "user"로 설정한다. 
 
 public class User {
