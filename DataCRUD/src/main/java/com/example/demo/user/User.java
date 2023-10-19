@@ -51,4 +51,11 @@ public class User {
         this.email = email;
         this.password = password;
     }
+
+    public void output(){
+        System.out.println(id + "\t\t" +
+                name + "\t" +
+                email + "\t\t" +
+                password);
+    }
 }

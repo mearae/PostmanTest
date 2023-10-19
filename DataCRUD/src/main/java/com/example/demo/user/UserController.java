@@ -29,11 +29,11 @@ public class UserController {
     // @RequestBody
     // json으로 넘어오는 데이터를 UserRequest.LoginDTO 형태로 변경 해주는 역할
     @PostMapping("/join")
-    public ResponseEntity<?> login(@RequestBody @Valid UserRequest.LoginDto loginDto){
+    public ResponseEntity<?> join(@RequestBody @Valid UserRequest.LoginDto loginDto){
         // ResponseEntity<?> : json 변경
         // 변경할 데이터의 형태가 모두 다를 수 있기 때문에 <?> 형태로 변환
-        //userService.findByEmail(loginDto);
-        userRepository.save(loginDto.toEntity());
+        userService.join(loginDto);
+        //userRepository.save(loginDto.toEntity());
 
         return ResponseEntity.ok(ApiUtils.success(null));
         //return ResponseEntity.ok(ApiUtils.error("meessage"));
