@@ -1,21 +1,11 @@
 package generic;
 
-public class Generic<T> {
+public class Generic {
+    public static <T> void output(T[] array){
 
-    private T value;
 
-    public T output(T t){
-        value = t;
-        return value;
-    }
-
-    public static class Inner<U>{
-        private U innerValue;
-
-        public U output(U u){
-            innerValue = u;
-            return innerValue;
+        for (T element : array){
+            System.out.print(element + " ");
         }
     }
-
 }
