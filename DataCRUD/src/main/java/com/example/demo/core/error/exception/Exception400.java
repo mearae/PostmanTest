@@ -1,4 +1,4 @@
-package com.example.demo.core.error;
+package com.example.demo.core.error.exception;
 
 import com.example.demo.core.utils.ApiUtils;
 import org.springframework.http.HttpStatus;
@@ -9,7 +9,7 @@ public class Exception400 extends RuntimeException{
     }
 
     public ApiUtils.ApiResult<?> body(){
-        return ApiUtils.error("zzz", HttpStatus.BAD_REQUEST);
+        return ApiUtils.error(getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     public HttpStatus status(){

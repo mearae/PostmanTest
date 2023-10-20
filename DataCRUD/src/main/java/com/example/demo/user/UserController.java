@@ -38,4 +38,11 @@ public class UserController {
         return ResponseEntity.ok(ApiUtils.success(null));
         //return ResponseEntity.ok(ApiUtils.error("meessage"));
     }
+
+    @PostMapping("/check")
+    public ResponseEntity<?> check(@RequestBody @Valid UserRequest.LoginDto loginDto, Error error){
+        userService.checkEmail(loginDto.getEmail());
+
+        return ResponseEntity.ok(ApiUtils.success(null));
+    }
 }
