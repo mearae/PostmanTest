@@ -53,9 +53,9 @@ public class User {
     }
 
     public void output(){
-        System.out.println(id + "\t\t" +
-                name + "\t" +
-                email + "\t\t" +
-                password);
+        System.out.println(id);
+        System.out.println(name);
+        System.out.println(email);
+        System.out.println(password);
     }
 }

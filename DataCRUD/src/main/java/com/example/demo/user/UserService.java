@@ -34,10 +34,6 @@ public class UserService {
     public void findAll() {
         List<User> all = userRepository.findAll();
 
-        System.out.println("id" + "\t\t" +
-                "name" + "\t\t" +
-                "email" + "\t\t\t\t\t" +
-                "password");
         for (User user : all){
             user.output();
         }
