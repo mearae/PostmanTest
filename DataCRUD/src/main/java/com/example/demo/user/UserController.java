@@ -3,7 +3,7 @@ package com.example.demo.user;
 import com.example.demo.core.utils.ApiUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +29,7 @@ public class UserController {
     // @RequestBody
     // json으로 넘어오는 데이터를 UserRequest.LoginDTO 형태로 변경 해주는 역할
     @PostMapping("/join")
-    public ResponseEntity<?> join(@RequestBody @Valid UserRequest.LoginDto loginDto){
+    public ResponseEntity<?> join(@RequestBody @Valid UserRequest.LoginDto loginDto, Error error){
         // ResponseEntity<?> : json 변경
         // 변경할 데이터의 형태가 모두 다를 수 있기 때문에 <?> 형태로 변환
         userService.join(loginDto);
