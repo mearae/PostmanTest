@@ -14,6 +14,8 @@ public class DemoApplication {
 	// localhost:8080
 	// ID : user
 	// PS : 콘솔 security password: ~~
+	//
+	// 1차 인증 -> 동의서 작성, 계정(회원정보) 생성과 그 계정에 권한과 인증코드 부여
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}

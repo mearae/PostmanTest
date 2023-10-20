@@ -1,6 +1,7 @@
 package com.example.demo.user;
 
 import com.example.demo.core.error.exception.Exception400;
+import com.example.demo.core.error.exception.Exception500;
 import lombok.RequiredArgsConstructor;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class UserService {
         try {
             userRepository.save(loginDto.toEntity());
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new Exception500(e.getMessage());
         }
     }
 
