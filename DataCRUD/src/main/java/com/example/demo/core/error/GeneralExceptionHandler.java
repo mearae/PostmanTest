@@ -1,9 +1,6 @@
 package com.example.demo.core.error;
 
-import com.example.demo.core.error.exception.Exception400;
-import com.example.demo.core.error.exception.Exception401;
-import com.example.demo.core.error.exception.Exception404;
-import com.example.demo.core.error.exception.Exception500;
+import com.example.demo.core.error.exception.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,6 +18,12 @@ public class GeneralExceptionHandler {
     // ** 인증되지 않음
     @ExceptionHandler(Exception401.class)
     public ResponseEntity<?> unAuthorized(Exception401 e){
+        return new ResponseEntity<>(e.body(),e.status());
+    }
+
+    // ** 접근 거부(서버가 도달한 클라이언트의 요청을 거부)
+    @ExceptionHandler(Exception403.class)
+    public ResponseEntity<?> notFound(Exception403 e){
         return new ResponseEntity<>(e.body(),e.status());
     }
 

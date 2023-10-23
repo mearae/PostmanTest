@@ -59,7 +59,8 @@ public class UserService {
     }
 
 
-        public void findAll() {
+
+    public void findAll() {
         List<User> all = userRepository.findAll();
 
         for (User user : all){
