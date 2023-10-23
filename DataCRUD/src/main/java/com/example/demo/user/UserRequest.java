@@ -12,7 +12,7 @@ public class UserRequest {
 
     @Setter
     @Getter
-    public static class LoginDto{
+    public static class JoinDto {
 
         // 데이터가 비어있을 수 없음
         @NotEmpty

@@ -30,10 +30,10 @@ public class UserController {
     // @RequestBody
     // json으로 넘어오는 데이터를 UserRequest.LoginDTO 형태로 변경 해주는 역할
     @PostMapping("/join")
-    public ResponseEntity<?> join(@RequestBody @Valid UserRequest.LoginDto loginDto, Error error){
+    public ResponseEntity<?> join(@RequestBody @Valid UserRequest.JoinDto joinDto, Error error){
         // ResponseEntity<?> : json 변경
         // 변경할 데이터의 형태가 모두 다를 수 있기 때문에 <?> 형태로 변환
-        userService.join(loginDto);
+        userService.join(joinDto);
         //userRepository.save(loginDto.toEntity());
 
         return ResponseEntity.ok(ApiUtils.success(null));
@@ -41,15 +41,15 @@ public class UserController {
     }
 
     @PostMapping("/check")
-    public ResponseEntity<?> check(@RequestBody @Valid UserRequest.LoginDto loginDto, Error error){
-        userService.checkEmail(loginDto.getEmail());
+    public ResponseEntity<?> check(@RequestBody @Valid UserRequest.JoinDto joinDto, Error error){
+        userService.checkEmail(joinDto.getEmail());
 
         return ResponseEntity.ok(ApiUtils.success(null));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody @Valid UserRequest.LoginDto loginDto, Error error){
-        String jwt = userService.login(loginDto);
+    public ResponseEntity<?> login(@RequestBody @Valid UserRequest.JoinDto joinDto, Error error){
+        String jwt = userService.login(joinDto);
 
         // jwt
         return ResponseEntity.ok().header(JwtTokenProvider.HEADER, jwt)

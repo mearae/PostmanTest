@@ -26,24 +26,24 @@ public class UserService {
     // private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public void join(UserRequest.LoginDto loginDto) {
+    public void join(UserRequest.JoinDto joinDto) {
         // 이미 있는 이메일인지 확인
-        checkEmail(loginDto.getEmail());
+        checkEmail(joinDto.getEmail());
         // loginDto.setPassword(passwordEncoder.encode(loginDto.getPassword()));
 
         try {
-            userRepository.save(loginDto.toEntity());
+            userRepository.save(joinDto.toEntity());
         } catch (Exception e) {
             throw new Exception500(e.getMessage());
         }
     }
 
-    public String login(UserRequest.LoginDto loginDto) {
+    public String login(UserRequest.JoinDto joinDto) {
         // ** 인증 작업
         try{
             UsernamePasswordAuthenticationToken token
                     = new UsernamePasswordAuthenticationToken(
-                            loginDto.getEmail(),loginDto.getPassword());
+                            joinDto.getEmail(), joinDto.getPassword());
             Authentication authentication
                     = authenticationManager.authenticate(token);
             // ** 인증 완료 값을 받아온다.
