@@ -5,6 +5,9 @@ import com.example.demo.core.error.exception.Exception401;
 import com.example.demo.core.error.exception.Exception500;
 import lombok.RequiredArgsConstructor;
 //import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +20,7 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final AuthenticationManager authenticationManager;
     // private final PasswordEncoder passwordEncoder;
 
     @Transactional
@@ -35,7 +39,15 @@ public class UserService {
     public String login(UserRequest.LoginDto loginDto) {
         // ** 인증 작업
         try{
-            return "Bearer " + "인증 완료";
+            UsernamePasswordAuthenticationToken token
+                    = new UsernamePasswordAuthenticationToken(
+                            loginDto.getEmail(),loginDto.getPassword());
+            Authentication authentication
+                    = authenticationManager.authenticate(token);
+            // ** 인증 완료 값을 받아온다.
+
+            
+            return "Bearer " + "인증 값";
         }catch (Exception e){
             // 401 반환
             throw new Exception401("인증되지 않음.");
