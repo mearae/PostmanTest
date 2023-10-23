@@ -46,7 +46,7 @@ public class UserService {
                     = authenticationManager.authenticate(token);
             // ** 인증 완료 값을 받아온다.
 
-            
+
             return "Bearer " + "인증 값";
         }catch (Exception e){
             // 401 반환

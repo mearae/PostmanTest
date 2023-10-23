@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -41,6 +43,17 @@ public class User {
 
     @Column(length = 255, nullable = false)
     private String password;
+
+
+
+    @Column(length = 30)
+    @Convert(converter = StringArrayConverter.class)
+    private List<String> roles = new ArrayList<>();
+    // ** 사용자 권한을 저장한다.
+    // ** ROLE_ADMIN
+    // ** ROLE_MANAGER
+    // ** ROLE_USER 등등...
+
 
     // ** 빌더 패턴을 쉽게 구현할 수 있도록 해준다.
     // ** 주로 인자가 많거나, 인자를 선택적으로 지정해야 하는 경우 사용된다.

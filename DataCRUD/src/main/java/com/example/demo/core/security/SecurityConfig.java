@@ -1,17 +1,25 @@
 package com.example.demo.core.security;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @RequiredArgsConstructor
 @Configuration // ** 현재 클래스를 (설정 클래스)로 설정
 public class SecurityConfig {
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration authenticationConfiguration) throws Exception{
@@ -33,5 +41,18 @@ public class SecurityConfig {
         httpSecurity.httpBasic().disable();
 
         return httpSecurity.build();
+    }
+
+    public class CustomSecurityFilterManager extends AbstractHttpConfigurer<CustomSecurityFilterManager, HttpSecurity>{
+        @Override
+        public void configure(HttpSecurity httpSecurity) throws Exception {
+            AuthenticationManager authenticationManager = httpSecurity.getSharedObject(
+                    AuthenticationManager.class
+            );
+
+            httpSecurity.addFilter(new JwtAuthenticationFilter(authenticationManager));
+
+            super.configure(httpSecurity);
+        }
     }
 }
