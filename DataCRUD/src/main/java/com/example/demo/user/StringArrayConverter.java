@@ -17,10 +17,12 @@ public class StringArrayConverter implements AttributeConverter<List<String>,Str
 
     @Override
     public List<String> convertToEntityAttribute(String dbData) {
+        // ** JPA가 save할 때, select부터 진행하기 때문에 같이 null인지 확인
         if (dbData == null){
             return Collections.emptyList();
         }
         else {
+            // ** 전달받은 하나의 문자열을 ","로 구분하여 리스트로 변환
             return Arrays.stream(dbData.split(SPLIT_CHAR))
                     .map(String::valueOf)
                     .collect(Collectors.toList());

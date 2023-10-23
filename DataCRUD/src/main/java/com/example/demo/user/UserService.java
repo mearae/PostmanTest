@@ -3,6 +3,8 @@ package com.example.demo.user;
 import com.example.demo.core.error.exception.Exception400;
 import com.example.demo.core.error.exception.Exception401;
 import com.example.demo.core.error.exception.Exception500;
+import com.example.demo.core.security.CustomUserDetails;
+import com.example.demo.core.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -45,9 +47,11 @@ public class UserService {
             Authentication authentication
                     = authenticationManager.authenticate(token);
             // ** 인증 완료 값을 받아온다.
+            // 인증키
+            CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
 
 
-            return "Bearer " + "인증 값";
+            return JwtTokenProvider.create(customUserDetails.getUser());
         }catch (Exception e){
             // 401 반환
             throw new Exception401("인증되지 않음.");

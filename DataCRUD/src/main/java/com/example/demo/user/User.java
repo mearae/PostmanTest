@@ -48,6 +48,7 @@ public class User {
 
     @Column(length = 30)
     @Convert(converter = StringArrayConverter.class)
+    // DB에서 가져올 때 List로, DB에 저장할 때 Entity로
     private List<String> roles = new ArrayList<>();
     // ** 사용자 권한을 저장한다.
     // ** ROLE_ADMIN
@@ -58,11 +59,12 @@ public class User {
     // ** 빌더 패턴을 쉽게 구현할 수 있도록 해준다.
     // ** 주로 인자가 많거나, 인자를 선택적으로 지정해야 하는 경우 사용된다.
     @Builder
-    public User(int id, String name, String email, String password) {
+    public User(int id, String name, String email, String password,List<String> roles) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.roles = roles;
     }
 
     public void output(){

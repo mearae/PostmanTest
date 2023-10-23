@@ -1,5 +1,6 @@
 package com.example.demo.user;
 
+import com.example.demo.core.security.JwtTokenProvider;
 import com.example.demo.core.utils.ApiUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +52,7 @@ public class UserController {
         String jwt = userService.login(loginDto);
 
         // jwt
-        return ResponseEntity.ok().header("Authorization", jwt)
+        return ResponseEntity.ok().header(JwtTokenProvider.HEADER, jwt)
                 .body(ApiUtils.success(null));
     }
 }
