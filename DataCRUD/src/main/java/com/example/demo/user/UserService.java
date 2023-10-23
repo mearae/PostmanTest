@@ -1,6 +1,7 @@
 package com.example.demo.user;
 
 import com.example.demo.core.error.exception.Exception400;
+import com.example.demo.core.error.exception.Exception401;
 import com.example.demo.core.error.exception.Exception500;
 import lombok.RequiredArgsConstructor;
 //import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,7 +32,18 @@ public class UserService {
         }
     }
 
-    public void findAll() {
+    public String login(UserRequest.LoginDto loginDto) {
+        // ** 인증 작업
+        try{
+            return "Bearer " + "인증 완료";
+        }catch (Exception e){
+            // 401 반환
+            throw new Exception401("인증되지 않음.");
+        }
+    }
+
+
+        public void findAll() {
         List<User> all = userRepository.findAll();
 
         for (User user : all){

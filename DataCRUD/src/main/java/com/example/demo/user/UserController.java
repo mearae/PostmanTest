@@ -45,4 +45,13 @@ public class UserController {
 
         return ResponseEntity.ok(ApiUtils.success(null));
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody @Valid UserRequest.LoginDto loginDto, Error error){
+        String jwt = userService.login(loginDto);
+
+        // jwt
+        return ResponseEntity.ok().header("Authorization", jwt)
+                .body(ApiUtils.success(null));
+    }
 }
