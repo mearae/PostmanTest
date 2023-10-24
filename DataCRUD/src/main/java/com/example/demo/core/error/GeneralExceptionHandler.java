@@ -23,7 +23,7 @@ public class GeneralExceptionHandler {
 
     // ** 접근 거부(서버가 도달한 클라이언트의 요청을 거부)
     @ExceptionHandler(Exception403.class)
-    public ResponseEntity<?> notFound(Exception403 e){
+    public ResponseEntity<?> forbidden(Exception403 e){
         return new ResponseEntity<>(e.body(),e.status());
     }
 
