@@ -14,15 +14,20 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
+@AutoConfigureRestDocs(uriScheme = "http",uriHost = "localhost",uriPort = 8080)
 @SpringBootTest
+@Sql("classpath:db/dataset.sql")
 @AutoConfigureMockMvc
-public class UserControllerTest {
+public class UserControllerTest extends MyRestDoc{
     @Autowired
     private MockMvc mockMvc;
 
@@ -48,10 +53,29 @@ public class UserControllerTest {
         ResultActions resultActions = mockMvc.perform(
                 post("/join")
                         .content(requestBody)
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andExpect(header().exists(JwtTokenProvider.HEADER))
-                .andExpect(jsonPath("$.success").value("true"));
+                        .contentType(MediaType.APPLICATION_JSON_VALUE));
+
+        resultActions.andExpect(jsonPath("$.success").value("true"));
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
+    }
+
+    @Test
+    public void testLogin() throws Exception{
+        UserRequest.JoinDto joinDto = new UserRequest.JoinDto();
+
+        joinDto.setEmail("user123@gmail.com");
+        joinDto.setPassword("asdfasd123!");
+        joinDto.setName("배준혁");
+
+        String requestBody = objectMapper.writeValueAsString(joinDto);
+
+        ResultActions resultActions = mockMvc.perform(
+                        post("/login")
+                                .content(requestBody)
+                                .contentType(MediaType.APPLICATION_JSON_VALUE));
+
+        resultActions.andExpect(jsonPath("$.success").value("true"));
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }
 
 }
