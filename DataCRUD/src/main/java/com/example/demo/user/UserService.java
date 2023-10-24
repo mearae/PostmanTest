@@ -53,7 +53,7 @@ public class UserService {
                     = authenticationManager.authenticate(token);
             // ** 인증 완료 값을 받아온다.
             // 인증키
-            CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+            CustomUserDetails customUserDetails = (CustomUserDetails)authentication.getPrincipal();
 
 
             return JwtTokenProvider.create(customUserDetails.getUser());

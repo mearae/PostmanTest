@@ -5,6 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
 // ** 테스트 클래스라는 것을 명시
+@Sql("classpath:db/dataset.sql")
 @SpringBootTest
 class DemoApplicationTests {
 

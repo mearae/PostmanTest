@@ -19,7 +19,6 @@ import javax.validation.Valid;
 @RestController
 public class UserController {
 
-    private final UserRepository userRepository;
     private final UserService userService;
 
     // @Valid : 받아온 폼의 데이터의 유효성을 검사하는 역할을 수행

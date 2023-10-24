@@ -10,11 +10,11 @@ import org.springframework.http.HttpStatus;
 public class ApiUtils {
 
     public static <T> ApiResult<T> success(T response){
-        return new ApiResult<>(true,response,null);
+        return new ApiResult<T>(true,response,null);
     }
 
     public static <T> ApiResult<T> error(String message, HttpStatus httpStatus){
-        return new ApiResult<>(false,null,new ApiError(message, httpStatus.value()));
+        return new ApiResult<T>(false,null,new ApiError(message, httpStatus.value()));
     }
 
     // ** json으로 반환해야할 데이터
