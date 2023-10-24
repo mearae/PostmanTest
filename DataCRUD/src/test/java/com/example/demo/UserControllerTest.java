@@ -41,7 +41,7 @@ public class UserControllerTest {
 
         joinDto.setEmail("example123@gmail.com");
         joinDto.setPassword("asdfasd123!");
-        joinDto.setName("asdfasdf");
+        joinDto.setName("배준혁");
 
         String requestBody = objectMapper.writeValueAsString(joinDto);
 

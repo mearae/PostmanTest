@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,13 +24,17 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
-    // private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public void join(UserRequest.JoinDto joinDto) {
         // 이미 있는 이메일인지 확인
         checkEmail(joinDto.getEmail());
-        // loginDto.setPassword(passwordEncoder.encode(loginDto.getPassword()));
+
+        String encodedPassword = passwordEncoder.encode(joinDto.getPassword());
+
+        System.out.println("Final Hash: " + encodedPassword);
+        joinDto.setPassword(encodedPassword);
 
         try {
             userRepository.save(joinDto.toEntity());
