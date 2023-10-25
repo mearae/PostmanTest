@@ -57,11 +57,11 @@ public class User {
     // ** 빌더 패턴을 쉽게 구현할 수 있도록 해준다.
     // ** 주로 인자가 많거나, 인자를 선택적으로 지정해야 하는 경우 사용된다.
     @Builder
-    public User(int id, String email, String password, String username, List<String> roles) {
+    public User(int id, String email, String password, String name, List<String> roles) {
         this.id = id;
         this.email = email;
         this.password = password;
-        this.username = username;
+        this.username = name;
         this.roles = roles;
     }
 

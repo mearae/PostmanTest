@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
-@AutoConfigureRestDocs(uriScheme = "http",uriHost = "localhost",uriPort = 8080)
+@AutoConfigureRestDocs(uriScheme = "http", uriHost = "localhost", uriPort = 8080)
 @SpringBootTest
 @AutoConfigureMockMvc
 public class UserControllerTest extends MyRestDoc{
@@ -32,7 +32,7 @@ public class UserControllerTest extends MyRestDoc{
 
         joinDto.setEmail("example123@gmail.com");
         joinDto.setPassword("asdfasd123!");
-        joinDto.setUsername("배준혁");
+        joinDto.setName("배준혁");
 
         String requestBody = objectMapper.writeValueAsString(joinDto);
 
@@ -41,7 +41,8 @@ public class UserControllerTest extends MyRestDoc{
                         .content(requestBody)
                         .contentType(MediaType.APPLICATION_JSON_VALUE));
 
-        resultActions.andExpect(jsonPath("$.success").value("true"));
+        resultActions.andExpect(jsonPath("$.success")
+                .value("true"));
         resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }
 
@@ -52,7 +53,7 @@ public class UserControllerTest extends MyRestDoc{
 
         joinDto.setEmail("example123@gmail.com");
         joinDto.setPassword("asdfasd123!");
-        joinDto.setUsername("배준혁");
+        joinDto.setName("배준혁");
 
         String requestBody = objectMapper.writeValueAsString(joinDto);
 
@@ -61,7 +62,8 @@ public class UserControllerTest extends MyRestDoc{
                                 .content(requestBody)
                                 .contentType(MediaType.APPLICATION_JSON_VALUE));
 
-        resultActions.andExpect(jsonPath("$.success").value("true"));
+        resultActions.andExpect(jsonPath("$.success")
+                .value("true"));
         resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }
 
