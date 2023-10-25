@@ -14,36 +14,36 @@ public class GeneralExceptionHandler {
     // ** 데이터 유효성 검사 실패
     @ExceptionHandler(Exception400.class)
     public ResponseEntity<?> badRequest(Exception400 e){
-        return new ResponseEntity<>(e.body(),e.status());
+        return new ResponseEntity<>(e.body(), e.status());
     }
 
     // ** 인증되지 않음
     @ExceptionHandler(Exception401.class)
     public ResponseEntity<?> unAuthorized(Exception401 e){
-        return new ResponseEntity<>(e.body(),e.status());
+        return new ResponseEntity<>(e.body(), e.status());
     }
 
     // ** 접근 거부(서버가 도달한 클라이언트의 요청을 거부)
     @ExceptionHandler(Exception403.class)
     public ResponseEntity<?> forbidden(Exception403 e){
-        return new ResponseEntity<>(e.body(),e.status());
+        return new ResponseEntity<>(e.body(), e.status());
     }
 
     // ** 권한 없음 (삭제된 게시물에 대한 접근, 로그인 되지 않은 상태에서의 접근 등등)
     @ExceptionHandler(Exception404.class)
     public ResponseEntity<?> notFound(Exception404 e){
-        return new ResponseEntity<>(e.body(),e.status());
+        return new ResponseEntity<>(e.body(), e.status());
     }
 
     // ** 서버 문제
     @ExceptionHandler(Exception500.class)
     public ResponseEntity<?> serverError(Exception500 e){
-        return new ResponseEntity<>(e.body(),e.status());
+        return new ResponseEntity<>(e.body(), e.status());
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> unknownServerError(Exception e){
         ApiUtils.ApiResult<?> apiResult = ApiUtils.error(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        return new ResponseEntity<>(apiResult,HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(apiResult, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

@@ -10,11 +10,11 @@ import org.springframework.http.HttpStatus;
 public class ApiUtils {
 
     public static <T> ApiResult<T> success(T response){
-        return new ApiResult<T>(true,response,null);
+        return new ApiResult<T>(true, response, null);
     }
 
     public static <T> ApiResult<T> error(String message, HttpStatus httpStatus){
-        return new ApiResult<T>(false,null,new ApiError(message, httpStatus.value()));
+        return new ApiResult<T>(false, null, new ApiError(message, httpStatus.value()));
     }
 
     // ** json으로 반환해야할 데이터
@@ -26,9 +26,9 @@ public class ApiUtils {
 
         public String toString(){
             return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                    .append("success",success)
-                    .append("response",response)
-                    .append("error",error)
+                    .append("success", success)
+                    .append("response", response)
+                    .append("error", error)
                     .toString();
         }
     }
@@ -40,8 +40,8 @@ public class ApiUtils {
 
         public String toString(){
             return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                    .append("message",message)
-                    .append("status",status)
+                    .append("message", message)
+                    .append("status", status)
                     .toString();
         }
     }

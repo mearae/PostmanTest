@@ -34,12 +34,12 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 
         // ** 헤더가 없다면 이 메소드에서 더 할 일은 없음, 다음으로 넘김.
         if (prefixJwt == null){
-            chain.doFilter(request,response);
+            chain.doFilter(request, response);
             return;
         }
 
         // ** Bearer 제거
-        String jwt = prefixJwt.replace(JwtTokenProvider.TOKEN_PREFIX,"");
+        String jwt = prefixJwt.replace(JwtTokenProvider.TOKEN_PREFIX, "");
 
         try {
             log.debug("토큰 있음.");
@@ -61,8 +61,8 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 
             // ** Spring Security / 인증 정보를 관리하는데 사용
             Authentication authentication = new UsernamePasswordAuthenticationToken(
-                    customUserDetails,
-                    customUserDetails.getPassword(),
+                    customUserDetails, 
+                    customUserDetails.getPassword(), 
                     customUserDetails.getAuthorities()
             );
 
@@ -75,7 +75,7 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
         } catch (TokenExpiredException tee){
             log.debug("토큰 검증 실패");
         } finally {
-            chain.doFilter(request,response);
+            chain.doFilter(request, response);
         }
     }
 }

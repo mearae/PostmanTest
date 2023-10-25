@@ -110,7 +110,7 @@ public class SecurityConfig {
     public CorsConfigurationSource configurationSource() {
         CorsConfiguration corsConfigurationSource = new CorsConfiguration();
         corsConfigurationSource.addAllowedHeader("*"); // 모든 헤더를 허용
-        corsConfigurationSource.addAllowedMethod("*"); // GET,POST,PUT, DELETE 등의 모든 메서드를 허용
+        corsConfigurationSource.addAllowedMethod("*"); // GET, POST, PUT, DELETE 등의 모든 메서드를 허용
         corsConfigurationSource.addAllowedOriginPattern("*"); // 모든 IP 주소를 허용
         corsConfigurationSource.setAllowCredentials(true); // 클라이언트 쿠키 요청 허용
         corsConfigurationSource.addExposedHeader("Authorization"); // 헤더
@@ -119,7 +119,7 @@ public class SecurityConfig {
                 = new UrlBasedCorsConfigurationSource();
 
         // ** (/) 들어오는 모든 유형의 URL 패턴을 허용
-        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**",corsConfigurationSource);
+        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfigurationSource);
         return urlBasedCorsConfigurationSource;
     }
 }
