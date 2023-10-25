@@ -18,7 +18,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 @AutoConfigureRestDocs(uriScheme = "http",uriHost = "localhost",uriPort = 8080)
 @SpringBootTest
-@Sql("classpath:db/dataset.sql")
 @AutoConfigureMockMvc
 public class UserControllerTest extends MyRestDoc{
     @Autowired
@@ -33,7 +32,7 @@ public class UserControllerTest extends MyRestDoc{
 
         joinDto.setEmail("example123@gmail.com");
         joinDto.setPassword("asdfasd123!");
-        joinDto.setName("배준혁");
+        joinDto.setUsername("배준혁");
 
         String requestBody = objectMapper.writeValueAsString(joinDto);
 
@@ -47,12 +46,13 @@ public class UserControllerTest extends MyRestDoc{
     }
 
     @Test
+    @Sql("classpath:db/dataset.sql")
     public void testLogin() throws Exception{
         UserRequest.JoinDto joinDto = new UserRequest.JoinDto();
 
-        joinDto.setEmail("user123@gmail.com");
+        joinDto.setEmail("example123@gmail.com");
         joinDto.setPassword("asdfasd123!");
-        joinDto.setName("배준혁");
+        joinDto.setUsername("배준혁");
 
         String requestBody = objectMapper.writeValueAsString(joinDto);
 

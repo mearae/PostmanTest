@@ -30,11 +30,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ** PK 자동 설정
     private int id;
 
-    // ** length = 45 : DB에서의 길이를 45로 설정
-    // ** nullable = false : 이 컬럼을 null로 설정할 수 없다.
-    @Column(length = 45, nullable = false)
-    private String name;
-
     // ** length = 100 : DB에서의 길이를 100로 설정
     // ** nullable = false : 이 컬럼을 null로 설정할 수 없다.
     // ** unique = true : 이 컬럼의 값을 유일한 값으로 설정한다. (중복 불가)
@@ -44,7 +39,10 @@ public class User {
     @Column(length = 255, nullable = false)
     private String password;
 
-
+    // ** length = 45 : DB에서의 길이를 45로 설정
+    // ** nullable = false : 이 컬럼을 null로 설정할 수 없다.
+    @Column(length = 45, nullable = false)
+    private String username;
 
     @Column(length = 30)
     @Convert(converter = StringArrayConverter.class)
@@ -59,19 +57,19 @@ public class User {
     // ** 빌더 패턴을 쉽게 구현할 수 있도록 해준다.
     // ** 주로 인자가 많거나, 인자를 선택적으로 지정해야 하는 경우 사용된다.
     @Builder
-    public User(int id, String name, String email, String password,List<String> roles) {
+    public User(int id, String email, String password, String username, List<String> roles) {
         this.id = id;
-        this.name = name;
         this.email = email;
         this.password = password;
+        this.username = username;
         this.roles = roles;
     }
 
     public void output(){
         System.out.println(id);
-        System.out.println(name);
         System.out.println(email);
         System.out.println(password);
+        System.out.println(username);
         System.out.println(roles);
     }
 }

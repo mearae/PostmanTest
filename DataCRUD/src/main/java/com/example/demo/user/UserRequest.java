@@ -31,13 +31,13 @@ public class UserRequest {
         // [A-Za-z\d@#$%^&+=!@#$%^&*()_~+=[\]|\\;:'"<>,.?/-]{8,20}: 영문자, 숫자 및 특수문자만 허용하며, 8~20글자여야 함
 
         @NotEmpty
-        private String name;
+        private String username;
 
         public User toEntity(){
             return User.builder()
-                    .name(name)
                     .email(email)
                     .password(password)
+                    .username(username)
                     .roles(Collections.singletonList("ROLE_USER"))
                     .build();
         }
