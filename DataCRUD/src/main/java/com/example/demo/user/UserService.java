@@ -5,6 +5,7 @@ import com.example.demo.core.error.exception.Exception401;
 import com.example.demo.core.error.exception.Exception500;
 import com.example.demo.core.security.CustomUserDetails;
 import com.example.demo.core.security.JwtTokenProvider;
+import com.example.demo.core.utils.SignUpMessageSender;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -44,6 +45,10 @@ public class UserService {
 
         try {
             userRepository.save(joinDto.toEntity());
+
+            // 자기 전화번호로 회원가입 메세지가 오도록 함
+            SignUpMessageSender.sendMessage("01074517172", joinDto.getPhoneNumber()
+                    ,"환영합니다. 회원가입이 완료되었습니다.");
         } catch (Exception e) {
             throw new Exception500(e.getMessage());
         }
@@ -61,7 +66,7 @@ public class UserService {
             // 인증키
             CustomUserDetails customUserDetails = (CustomUserDetails)authentication.getPrincipal();
 
-
+            // 토큰 발급
             return JwtTokenProvider.create(customUserDetails.getUser());
         }catch (Exception e){
             // 401 반환
