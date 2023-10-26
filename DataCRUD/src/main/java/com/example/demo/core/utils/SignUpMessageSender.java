@@ -18,7 +18,8 @@ public class SignUpMessageSender {
     public static final String APISECRETKEY = "LYPZLHHLCNK9RWLL4CSBMCSGTRBSHPX2";
 
     // ** 토큰의 서명을 생성하고 검증할 때 사용하는 비밀 키
-    private static final String DOMAIN = "https://api.coolsms.co.kr";
+    // ** nurigo -> 좌측 메뉴 -> 아래쪽 SDK 다운로드 -> Java용 SDK -> Github Repo -> gradle-spring-demo/src/main/java/net/nurigo/gradlespringdemo/ExampleController.java
+    private static final String DOMAIN = "https://api.solapi.com";
 
 
     private static DefaultMessageService messageService = null;

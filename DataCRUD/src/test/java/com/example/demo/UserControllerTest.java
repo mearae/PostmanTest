@@ -16,10 +16,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
+// http://localhost:8080 로 시작할 수 있도록 셋팅.
 @AutoConfigureRestDocs(uriScheme = "http", uriHost = "localhost", uriPort = 8080)
 @SpringBootTest
 @AutoConfigureMockMvc
 public class UserControllerTest extends MyRestDoc{
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -28,6 +30,7 @@ public class UserControllerTest extends MyRestDoc{
 
     @Test
     public void testJoin() throws Exception{
+        // given
         UserRequest.JoinDto joinDto = new UserRequest.JoinDto();
 
         joinDto.setEmail("example123@gmail.com");
@@ -36,19 +39,21 @@ public class UserControllerTest extends MyRestDoc{
 
         String requestBody = objectMapper.writeValueAsString(joinDto);
 
+        // when
         ResultActions resultActions = mockMvc.perform(
                 post("/join")
                         .content(requestBody)
                         .contentType(MediaType.APPLICATION_JSON_VALUE));
 
-        resultActions.andExpect(jsonPath("$.success")
-                .value("true"));
+        // verify
+        resultActions.andExpect(jsonPath("$.success").value("true"));
         resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }
 
     @Test
     @Sql("classpath:db/dataset.sql")
     public void testLogin() throws Exception{
+        // given
         UserRequest.JoinDto joinDto = new UserRequest.JoinDto();
 
         joinDto.setEmail("example123@gmail.com");
@@ -57,13 +62,14 @@ public class UserControllerTest extends MyRestDoc{
 
         String requestBody = objectMapper.writeValueAsString(joinDto);
 
+        // when
         ResultActions resultActions = mockMvc.perform(
                         post("/login")
                                 .content(requestBody)
                                 .contentType(MediaType.APPLICATION_JSON_VALUE));
 
-        resultActions.andExpect(jsonPath("$.success")
-                .value("true"));
+        // verify
+        resultActions.andExpect(jsonPath("$.success").value("true"));
         resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }
 

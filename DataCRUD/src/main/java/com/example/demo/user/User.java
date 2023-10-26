@@ -11,7 +11,12 @@ import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-// ** 기본 생성자 생성 + 생성자 접근 수준 설정
+// ** @NoArgsConstructor : Lombok 라이브러리에서 사용됨.
+/*  'public'보다는 'protected' 접근 수준으로 설정해야함.
+이유는, 현재 클래스를 외부에서 임의로 인스턴스화하는 것을 방지해야하기 때문.
+Entity 클래스의 인스턴스는 JPA나 해당 클래스의 정적 팩토리 메서드 등을 통해서만
+생성되어야 한다는 의도를 명확하게 나타낸 것이라고 봐야함.
+*/
 
 @Entity // User라는 이름의 테이블을 생성할 예정
 // ** 제약사항
@@ -22,17 +27,24 @@ import java.util.List;
 // 3-2. @Column, @Id, @OneToMany, @ManyToOne 등등 ...
 
 @Table(name = "user_tb") // 회사마다 약속된 이름이 다름
-// ** table 이름을 "user"로 설정한다. 
+// ** JPA(Java Persistence API)에서 사용됨.
+// ** Entity 클래스가 매핑될 데이터베이스의 테이블을 지정
+// ** name = "user_tb" = 테이블의 이름 설정
 
 public class User {
 
     @Id // ** 해당 필드를 PK로 설정한다.
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ** PK 자동 설정
+    // @Id 어노테이션과 함께 사용
+    // GenerationType.IDENTITY 전략은 데이터베이스에 레코드를 삽입할 때,
+    // 데이터베이스가 자동으로 아이디를 생성하도록 함.
     private int id;
 
-    // ** length = 100 : DB에서의 길이를 100로 설정
-    // ** nullable = false : 이 컬럼을 null로 설정할 수 없다.
-    // ** unique = true : 이 컬럼의 값을 유일한 값으로 설정한다. (중복 불가)
+    // @Column 어노테이션은 JPA(Java Persistence API)에서 사용됨
+    // Entity 클래스의 필드가 매핑될 데이터베이스 컬럼의 세부 사항을 지정한다.
+    // length = 100은 데이터베이스에서 이 컬럼의 최대 길이를 100으로 설정.
+    // nullable = false: 이 컬럼은 NULL 값을 허용하지 않음.
+    // unique = true: 이 컬럼의 값은 유일해야 함. (중복된 값이 들어갈 수 없음.)
     @Column(length = 100, nullable = false, unique = true)
     private String email;
 
@@ -54,8 +66,9 @@ public class User {
     // ** ROLE_USER 등등...
 
 
-    // ** 빌더 패턴을 쉽게 구현할 수 있도록 해준다.
-    // ** 주로 인자가 많거나, 인자를 선택적으로 지정해야 하는 경우 사용된다.
+    // @Builder 어노테이션은 Lombok 라이브러리에서 제공.
+    // 빌더 패턴을 쉽게 구현할 수 있게 도와준다.
+    // 주로 생성자의 인자가 많거나, 인자를 선택적으로 지정해야하는 경우에 사용.
     @Builder
     public User(int id, String email, String password, String name, List<String> roles) {
         this.id = id;

@@ -74,8 +74,9 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
         catch (SignatureVerificationException sve) {
             log.debug("토큰 검증 실패");
         } catch (TokenExpiredException tee){
-            log.debug("토큰 검증 실패");
+            log.debug("토큰 사용 만료");
         } finally {
+            // ** 필터로 응답을 넘긴다.
             chain.doFilter(request, response);
         }
     }
