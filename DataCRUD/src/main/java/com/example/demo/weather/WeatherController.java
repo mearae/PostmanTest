@@ -17,7 +17,7 @@ public class WeatherController {
     public ResponseEntity<?> getWeather() throws JsonProcessingException {
 
         String city = "Busan";
-        String apikey = "b0a4e6f023160191132b569c5ec48e77";
+        String apikey = "openWeather api key";
         String phoneNumber = "01074517172";
         String units = "metric"; // 섭시로 설정 => 화시: imperial
         String weatherApiUrl = String.format("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s&units=%s", city, apikey, units);
@@ -36,7 +36,7 @@ public class WeatherController {
         }
 
         System.out.println(weatherResult);
-        SignUpMessageSender.sendMessage(phoneNumber, phoneNumber, weatherResult);
+        // SignUpMessageSender.sendMessage(phoneNumber, phoneNumber, weatherResult);
 
         return ResponseEntity.ok( ApiUtils.success(null) );
     }
