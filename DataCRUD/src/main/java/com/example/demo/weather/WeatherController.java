@@ -1,5 +1,4 @@
-package com.example.demo.core.weather;
-
+package com.example.demo.weather;
 
 import com.example.demo.core.utils.ApiUtils;
 import com.example.demo.core.utils.SignUpMessageSender;
@@ -18,7 +17,7 @@ public class WeatherController {
     public ResponseEntity<?> getWeather() throws JsonProcessingException {
 
         String city = "Busan";
-        String apikey = "내 nurigo api key";
+        String apikey = "b0a4e6f023160191132b569c5ec48e77";
         String phoneNumber = "01074517172";
         String units = "metric"; // 섭시로 설정 => 화시: imperial
         String weatherApiUrl = String.format("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s&units=%s", city, apikey, units);
