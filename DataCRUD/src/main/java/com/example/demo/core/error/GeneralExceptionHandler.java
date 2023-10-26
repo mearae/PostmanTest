@@ -41,6 +41,7 @@ public class GeneralExceptionHandler {
         return new ResponseEntity<>(e.body(), e.status());
     }
 
+    // ** 위 예외를 제외한 모든 예외처리
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> unknownServerError(Exception e){
         ApiUtils.ApiResult<?> apiResult = ApiUtils.error(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
