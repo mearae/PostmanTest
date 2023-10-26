@@ -54,7 +54,10 @@ public class User {
     // ** length = 45 : DB에서의 길이를 45로 설정
     // ** nullable = false : 이 컬럼을 null로 설정할 수 없다.
     @Column(length = 45, nullable = false)
-    private String username;
+    private String name;
+
+    @Column(length = 11, nullable = false)
+    private String phoneNumber;
 
     @Column(length = 30)
     @Convert(converter = StringArrayConverter.class)
@@ -70,11 +73,12 @@ public class User {
     // 빌더 패턴을 쉽게 구현할 수 있게 도와준다.
     // 주로 생성자의 인자가 많거나, 인자를 선택적으로 지정해야하는 경우에 사용.
     @Builder
-    public User(int id, String email, String password, String name, List<String> roles) {
+    public User(int id, String email, String password, String name, String phoneNumber, List<String> roles) {
         this.id = id;
         this.email = email;
         this.password = password;
-        this.username = name;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
         this.roles = roles;
     }
 
@@ -82,7 +86,8 @@ public class User {
         System.out.println(id);
         System.out.println(email);
         System.out.println(password);
-        System.out.println(username);
+        System.out.println(name);
+        System.out.println(phoneNumber);
         System.out.println(roles);
     }
 }

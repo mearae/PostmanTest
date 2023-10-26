@@ -33,11 +33,16 @@ public class UserRequest {
         @NotEmpty
         private String name;
 
+        @NotEmpty
+        @Pattern(regexp = "^[0-9]{10,11}$", message = "휴대폰 번호는 숫자 10~11자리만 가능합니다.")
+        private String phoneNumber;
+
         public User toEntity(){
             return User.builder()
                     .email(email)
                     .password(password)
                     .name(name)
+                    .phoneNumber(phoneNumber)
                     .roles(Collections.singletonList("ROLE_USER"))
                     .build();
         }
