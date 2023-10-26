@@ -1,5 +1,6 @@
-package com.example.demo.core.error.exception;
+package com.example.demo.core.error;
 
+import com.example.demo.core.error.exception.Exception400;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;

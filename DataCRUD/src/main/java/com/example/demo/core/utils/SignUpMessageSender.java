@@ -12,10 +12,10 @@ import org.springframework.context.annotation.Configuration;
 public class SignUpMessageSender {
 
     // ** 인증 헤더에 사용될 토큰의 접두어 ("Bearer ")
-    public static final String API_KEY = "NCSKOFZD7A3AF99H";
+    public static final String API_KEY = "내 nurigo api key";
 
     // ** 인증 헤더의 이름을 "Authorization"으로 설정.
-    public static final String APISECRETKEY = "LYPZLHHLCNK9RWLL4CSBMCSGTRBSHPX2";
+    public static final String APISECRETKEY = "내 nurigo api secret key";
 
     // ** 토큰의 서명을 생성하고 검증할 때 사용하는 비밀 키
     // ** nurigo -> 좌측 메뉴 -> 아래쪽 SDK 다운로드 -> Java용 SDK -> Github Repo -> gradle-spring-demo/src/main/java/net/nurigo/gradlespringdemo/ExampleController.java
